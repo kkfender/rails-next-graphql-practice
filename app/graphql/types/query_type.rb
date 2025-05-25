@@ -27,5 +27,18 @@ module Types
     def test_field
       "Hello World!"
     end
+
+    field :todos, [Types::TodoType], null: false, description: "Returns a list of todos"
+    field :todo, Types::TodoType, null: true do
+      argument :id, ID, required: true
+    end
+
+    def todos
+      Todo.all
+    end
+
+    def todo(id:)
+      Todo.find_by(id: id)
+    end
   end
 end
